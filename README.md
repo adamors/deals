@@ -1,24 +1,84 @@
-# README
+# Deals API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup Instructions
 
-Things you may want to cover:
+(Assuming Ruby is installed)
 
-* Ruby version
+1. **Install dependencies**
+   ```sh
+   bundle install
+   ```
 
-* System dependencies
+2. **Set up the database**
+   ```sh
+   bin/rails db:setup
+   bin/rails db:migrate
+   bin/rails db:seed
+   ```
 
-* Configuration
+3. **Run the server**
+   ```sh
+   bin/rails s
+   ```
 
-* Database creation
+4. **Run tests**
+   ```sh
+   bundle exec rspec
+   ```
 
-* Database initialization
+## API Usage
 
-* How to run the test suite
+### Search Deals
 
-* Services (job queues, cache servers, search engines, etc.)
+**Endpoint:**
+```
+GET /deals
+```
 
-* Deployment instructions
+**Query Parameters:**
+- `min_price` (float, optional)
+- `max_price` (float, optional)
+- `category_id` (integer, optional)
+- `subcategory_id` (integer, optional)
+- `location_id` (integer, optional)
+- `user_lat` (float, optional, for ranking by distance)
+- `user_lng` (float, optional, for ranking by distance)
 
-* ...
+### Example curl commands
+
+**Get all deals:**
+```sh
+curl -X GET "http://localhost:3000/deals"
+```
+
+**Filter by price range:**
+```sh
+curl -G "http://localhost:3000/deals" --data-urlencode "min_price=20" --data-urlencode "max_price=50"
+```
+
+**Filter by category and subcategory:**
+```sh
+curl -G "http://localhost:3000/deals" --data-urlencode "category_id=1" --data-urlencode "subcategory_id=2"
+```
+
+**Filter by location:**
+```sh
+curl -G "http://localhost:3000/deals" --data-urlencode "location_id=1"
+```
+
+**Rank by proximity to user location:**
+```sh
+curl -G "http://localhost:3000/deals" --data-urlencode "user_lat=37.7749" --data-urlencode "user_lng=-122.4194"
+```
+
+**Combined example:**
+```sh
+curl -G "http://localhost:3000/deals" \
+  --data-urlencode "min_price=10" \
+  --data-urlencode "max_price=100" \
+  --data-urlencode "category_id=1" \
+  --data-urlencode "location_id=1" \
+  --data-urlencode "user_lat=37.7749" \
+  --data-urlencode "user_lng=-122.4194"
+```
+
