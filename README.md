@@ -10,9 +10,9 @@
    ```
 
 2. Start Postgres
-```
-docker compose up -f postgres
-```
+   ```
+   docker compose up -f postgres 
+   ```
 
 3. Set up the database
    ```sh
