@@ -95,19 +95,11 @@ ActiveRecord::Schema[7.2].define(version: 20240611) do
   end
 
   add_foreign_key "deals", "categories"
-  add_foreign_key "deals", "categories"
-  add_foreign_key "deals", "merchants"
   add_foreign_key "deals", "merchants"
   add_foreign_key "deals", "subcategories"
-  add_foreign_key "deals", "subcategories"
-  add_foreign_key "deals_locations", "deals"
   add_foreign_key "deals_locations", "deals"
   add_foreign_key "deals_locations", "locations"
-  add_foreign_key "deals_locations", "locations"
-  add_foreign_key "deals_tags", "deals"
   add_foreign_key "deals_tags", "deals"
   add_foreign_key "deals_tags", "tags"
-  add_foreign_key "deals_tags", "tags"
-  add_foreign_key "subcategories", "categories"
   add_foreign_key "subcategories", "categories"
 end
